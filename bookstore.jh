@@ -1,0 +1,67 @@
+entity Categories {
+	id Integer,
+    name String,
+    description String
+}
+
+entity Books {
+	id Integer,
+    name String,
+    image String,
+    amount Integer,
+    description String,
+    price Long,
+    author String,
+    publisher String
+}
+
+entity Users {
+	id Integer,
+	first_name String,
+    last_name String,
+    login String,
+	password String,
+    imageUrl String,
+	email String,
+    name String,
+    activated Boolean,
+    role Roles
+}
+
+enum Roles {
+	ROLE_ADMIN, ROLE_USER, ROLE_ANONYMOUS
+}
+entity Bills {
+	id Integer,
+    create_by Integer,
+    create_date Instant,
+    status Status
+}
+enum Status {
+	DO, DOING, DONE, REJECT
+}
+relationship OneToOne{
+	Users{bill} to Bills
+}
+relationship OneToMany{
+	Categories{books} to Books
+}
+relationship ManyToOne{
+	Books{categories} to Categories
+}
+relationship ManyToMany{
+	Bills{books} to Books
+}
+
+// Set pagination options
+//paginate JobHistory, Employee with infinite-scroll
+//paginate Job with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceImpl except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
